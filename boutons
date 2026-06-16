@@ -1,0 +1,41 @@
+#include <ArduinoRobot.h>
+void setup(){
+  Robot.begin();
+}
+void loop(){
+  int boutton = Robot.keyboardRead();
+
+  if (boutton == BUTTON_UP) {
+
+    delay(1000);
+    Robot.motorsWrite(110, 100);
+    delay(1000);
+    Robot.motorsWrite(0, 0);
+
+    }else if (boutton == BUTTON_DOWN) {
+      delay(1000);
+      Robot.motorsWrite(-110, -100);
+      delay(1000);
+      Robot.motorsWrite(0, 0);
+
+  }else if (boutton == BUTTON_RIGHT) {
+      delay(1000);
+      Robot.motorsWrite(110, -100);
+      delay(1200);
+      Robot.motorsWrite(0, 0);
+
+  }else if (boutton == BUTTON_LEFT) {
+      delay(1000);
+      Robot.motorsWrite(-105, 100);
+      delay(1200);
+      Robot.motorsWrite(0, 0);
+
+  }
+  else if (boutton == BUTTON_MIDDLE) {
+      delay(1000);
+      Robot.motorsWrite(225, 200);
+      delay(5000);
+      Robot.motorsWrite(0, 0);
+
+  }
+}
