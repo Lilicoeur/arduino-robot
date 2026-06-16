@@ -1,0 +1,66 @@
+#include <ArduinoRobot.h>
+#include <Wire.h>
+
+void setup() {
+  Robot.begin();
+  Serial.begin(9600);
+  Robot.beginSpeaker();
+  playMelody();
+}
+
+void loop() {
+  Robot.updateIR();
+
+  int L2 = Robot.IRarray[0]; // far left
+  int L1 = Robot.IRarray[1]; // left
+  int C  = Robot.IRarray[2]; // center
+  int R1 = Robot.IRarray[3]; // right
+  int R2 = Robot.IRarray[4]; // far right
+
+  // STOP (all sensors see line)
+  if (L1 < 500 && C < 500 && R1 < 500) {
+    Robot.motorsWrite(0, 0);
+    playMelodyy();
+    delay(4000);
+  }
+
+  // CENTER → forward
+  else if (C < 500) {
+    Robot.motorsWrite(100, 100);
+  }
+
+  // slight left correction
+  else if (L1 < 500) {
+    Robot.motorsWrite(100, 0);
+  }
+
+  // strong left turn
+  else if (L2 < 500) {
+    Robot.motorsWrite(100, -100);
+  }
+
+  // slight right correction
+  else if (R1 < 500) {
+    Robot.motorsWrite(0, 100);
+  }
+
+  // strong right turn
+  else if (R2 < 500) {
+    Robot.motorsWrite(-100, 100);
+  }
+
+  else {
+    Robot.motorsWrite(0, 0);
+  }
+
+  delay(50);
+}
+
+void playMelody() {
+  char melody[] = "4cgc4ege4gag2c";
+  Robot.playMelody(melody);
+}
+void playMelodyy() {
+  char melodyy[] = "8ce2a8ecc";
+  Robot.playMelody(melodyy);
+}
