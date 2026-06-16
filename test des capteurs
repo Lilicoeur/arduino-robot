@@ -1,0 +1,15 @@
+#include <ArduinoRobot.h>
+#include <Wire.h>
+
+void setup() {
+  Robot.begin();
+  Serial.begin(9600);
+}
+
+void loop() {
+  Robot.updateIR();
+
+  Serial.println(Robot.IRarray[4]);
+
+  delay(100);
+}
