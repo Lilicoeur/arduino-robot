@@ -1,0 +1,24 @@
+#include <ArduinoRobot.h>
+#include <Wire.h>
+
+void setup() {
+  Robot.begin();
+  Robot.beginSpeaker();
+}
+
+void loop() {
+  Robot.beep(BEEP_SIMPLE);
+  delay(500);
+  Robot.beep(BEEP_DOUBLE);
+  delay(500);
+  Robot.beep(BEEP_LONG);
+  delay(1000);
+  
+  playMelody();
+  delay(4000);
+}
+
+void playMelody() {
+  char melody[] = "2cCdDefFgGaAb-";
+  Robot.playMelody(melody);
+}
