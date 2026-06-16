@@ -120,8 +120,15 @@ Pour calibrer un capteur il faut trouver une valeur de "référence" qui servira
 
 ♥ Screen :
 
+L'écran sers à afficher se dont on a besoins.
 
-Affiche des trucs sur l'écran
+
+♥ Boutons :
+
+Les boutons nous servent à communiquer avec la machine,on peut dire à la machine, si le boutton du milieu n'est pas pressé alors tu ne commence pas à rouler. Cela, en C++ se traduit par :
+
+                              
+
 
 Documentation et sources
 
@@ -263,6 +270,10 @@ Alimentation insuffisante : Moteurs nécessitent 6V minimum
   Coder pour l'arrêt à la fin du parcour
 
   Coder pour rajouter une mélodie au début et à la fin du programme
+
+- Phase 7 : apprendre à utiliser l'écran
+
+  Trouver les commandes...
 
 
 • 5. Architecture Électrique
