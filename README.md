@@ -122,12 +122,27 @@ Pour calibrer un capteur il faut trouver une valeur de "référence" qui servira
 
 L'écran sers à afficher se dont on a besoins.
 
+○ Exemple pour afficher une couleur :
+
 
 ♥ Boutons :
 
 Les boutons nous servent à communiquer avec la machine,on peut dire à la machine, si le boutton du milieu n'est pas pressé alors tu ne commence pas à rouler. Cela, en C++ se traduit par :
 
-                              
+                              #include <ArduinoRobot.h>
+                              void setup(){
+                                Robot.begin();
+                              }
+                              void loop(){
+                                int boutton = Robot.keyboardRead();
+
+                                if (boutton == BUTTON_UP) {
+
+                                  delay(1000);
+                                  Robot.motorsWrite(110, 100);
+                                  delay(1000);
+                                  Robot.motorsWrite(0, 0);
+                              }
 
 
 Documentation et sources
@@ -146,7 +161,7 @@ https://github.com/arduino-libraries/Robot_Control
 
 15/06 test des anciens codes. Test du buzzer-> il fonctionne normalement. teste des moteurs -> ils fonctionnent normalement. recherche des commandes des capteurs noir ou blanc.
 
-16/06 création du programme de suivi de ligne et ajout de musique interactive au début et à la fin du programme.
+16/06 création du programme de suivi de ligne et ajout de musique interactive au début et à la fin du programme. Création d'un programme en utilisant les boutons. Problème à résoudre le screen ne fonctionne pas correctement même avec les bonnes commandes...
 
 ♥ Rapport : Analyse et Restauration du Robot Arduino CROMA
 
@@ -273,7 +288,21 @@ Alimentation insuffisante : Moteurs nécessitent 6V minimum
 
 - Phase 7 : apprendre à utiliser l'écran
 
-  Trouver les commandes...
+  Trouver les commandes -> commandes trouvées dans la librairie
+
+  Problemme à raisoudre -> le screen s'allume mais n'exécute aucune commande
+
+  Mise en charge du robot
+
+  Le screen peut afficher un rectangle encadré de rouge mais pas de texte
+
+  Le screen réagit à "Robot.rect(10,10,50,30)"
+
+  Mais ne réagit pas à "Robot.fill(0,0,0)" ; "Robot.stroke(255,0,0)" ; "Robot.text("HELLO", 20, 50)".
+
+  Après essais "Robot.text("HELLO", 20, 50)" fonctionne mais est invisible si on ne met pas une autre forme en dessous -> on met un carré ou un rectangle en dessous pour   le voir.
+
+  
 
 
 • 5. Architecture Électrique
