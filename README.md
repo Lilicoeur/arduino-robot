@@ -360,6 +360,10 @@ Alimentation insuffisante : Moteurs nécessitent 6V minimum
 
   On va essayer de combiner le programme des boutons et celui du suivis de ligne.
 
+- Phase 9 : faire l'interface
+
+  On va commencer par coder l'interface sur le screen en utilisant le screen et les boutons. Les boutons serviront au humains pour communiquer avec le robot sur leur choix de programme. Le screen servira au robot à communiquer avec les humains.
+
 
 • 5. Architecture Électrique
 
