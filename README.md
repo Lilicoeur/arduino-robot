@@ -5,7 +5,7 @@ Arduino-CROMA
 
 -Brancher sur le Control Board (en haut)
 
--Selectionner COM13 Arduino Robot Control
+-Selectionner COM8 Arduino Robot Control
 
 -Et upload directement (pas besoin de verifier)
 
@@ -45,7 +45,7 @@ Il ne faut pas oublier les commandes :
 
 - #include <ArduinoRobot.h> pour importer les commandes controlant les activités du robot
 
-- Robot.begin() pour que les instructions suivantes lui sont destinées
+- Robot.begin() pour que les instructions suivantes lui soit destinées
 
 ○ Exemple de code pour faire avancer le robot :
 
@@ -122,8 +122,48 @@ Pour calibrer un capteur il faut trouver une valeur de "référence" qui servira
 
 L'écran sers à afficher se dont on a besoins.
 
-○ Exemple pour afficher une couleur :
+○ Exemple pour afficher la couleur noire sur tout l'écran :
 
+                                                    Robot.stroke(0,0,0);
+                                                    Robot.fill(0,0,0);
+                                                    Robot.rect(0,0,128,160);
+
+On peut aussi dessiner toutes sortes de formes comme une étoile :
+
+                                                    void starr() {
+                                                      int cx = 64;
+                                                      int cy = 80;
+                                                      int R  = 35;
+
+                                                      float x[5];
+                                                      float y[5];
+
+                                                      Robot.stroke(255, 255, 0); 
+
+                                                      for (int i = 0; i < 5; i++) {
+                                                        float angle = (i * 72 - 90) * 3.14159 / 180.0;
+                                                        x[i] = cx + R * cos(angle);
+                                                        y[i] = cy + R * sin(angle);
+                                                      }
+
+                                                      Robot.line(x[0], y[0], x[2], y[2]);
+                                                      Robot.line(x[2], y[2], x[4], y[4]);
+                                                      Robot.line(x[4], y[4], x[1], y[1]);
+                                                      Robot.line(x[1], y[1], x[3], y[3]);
+                                                      Robot.line(x[3], y[3], x[0], y[0]);
+
+                                                      delay(1000);
+
+                                                      // clear screen
+                                                      Robot.stroke(0,0,0);
+                                                      Robot.fill(0,0,0);
+                                                      Robot.rect(0,0,128,160);
+                                                    }
+
+
+On peut aussi écire des choses :
+
+                                                    Robot.text("HELLO WORLD", position x, position y);
 
 ♥ Boutons :
 
@@ -162,6 +202,8 @@ https://github.com/arduino-libraries/Robot_Control
 15/06 test des anciens codes. Test du buzzer-> il fonctionne normalement. teste des moteurs -> ils fonctionnent normalement. recherche des commandes des capteurs noir ou blanc.
 
 16/06 création du programme de suivi de ligne et ajout de musique interactive au début et à la fin du programme. Création d'un programme en utilisant les boutons. Problème à résoudre le screen ne fonctionne pas correctement même avec les bonnes commandes...
+
+17/06 problème compris et adaptation du programme pour que le screen fonctionne comme on veut. amélioration du programme des boutons pour qu'une image s'affiche à chaque fois qqu'un boutton est pressé.
 
 ♥ Rapport : Analyse et Restauration du Robot Arduino CROMA
 
@@ -290,7 +332,7 @@ Alimentation insuffisante : Moteurs nécessitent 6V minimum
 
   Trouver les commandes -> commandes trouvées dans la librairie
 
-  Problemme à raisoudre -> le screen s'allume mais n'exécute aucune commande
+  Problemme à résoudre -> le screen s'allume mais n'exécute aucune commande
 
   Mise en charge du robot
 
@@ -302,7 +344,21 @@ Alimentation insuffisante : Moteurs nécessitent 6V minimum
 
   Après essais "Robot.text("HELLO", 20, 50)" fonctionne mais est invisible si on ne met pas une autre forme en dessous -> on met un carré ou un rectangle en dessous pour   le voir.
 
-  
+  On peut faire des formes sur le screen mais on est toujours obligés de mettre un rectangle de la taille de l'écran pour voir apparaitre quoi que ce soit. on peut faire des lignes des rectangles ou carrés et des triangles.
+
+  On peut changer la couleur de toutes les formes.
+
+  Mais si on créé une forme plaine avec que des lignes on ne peut pass la remplire de couleur. Ou alors la commande n'a pas encore été trouvée.
+
+
+
+- Phase 8 : l'idée d'un gros projet
+
+  L'idée initiale, comme il existe beaucoup de programmes, est d'en rassembler au moins deux et de créer une interface sur le screen qui permet de choisir entre les deux. Pour cela il nous faudra une bonne maitrise du screen, les deux programmes, une bonne maitrise en "if" "else" et en boucle "for" et "while".
+
+  Mon idée est que l'utilisateur puisse utiliser les deux programmes sans reset ni éteindre le robot. Ce qui peut être très interressant pour les journées portes ouvertes ou il ne faut pas perdre de temps à téléverser les programmes en fonction de ce que l'on veut montrer.
+
+  On va essayer de combiner le programme des boutons et celui du suivis de ligne.
 
 
 • 5. Architecture Électrique
