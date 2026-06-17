@@ -203,7 +203,7 @@ https://github.com/arduino-libraries/Robot_Control
 
 16/06 création du programme de suivi de ligne et ajout de musique interactive au début et à la fin du programme. Création d'un programme en utilisant les boutons. Problème à résoudre le screen ne fonctionne pas correctement même avec les bonnes commandes...
 
-17/06 problème compris et adaptation du programme pour que le screen fonctionne comme on veut. amélioration du programme des boutons pour qu'une image s'affiche à chaque fois qqu'un boutton est pressé.
+17/06 problème compris et adaptation du programme pour que le screen fonctionne comme on veut. amélioration du programme des boutons pour qu'une image s'affiche à chaque fois qu'un bouton est pressé. Lancement d'un nouveau projet qui pourrai nous occuper longtemps. 
 
 ♥ Rapport : Analyse et Restauration du Robot Arduino CROMA
 
@@ -362,8 +362,19 @@ Alimentation insuffisante : Moteurs nécessitent 6V minimum
 
 - Phase 9 : faire l'interface
 
-  On va commencer par coder l'interface sur le screen en utilisant le screen et les boutons. Les boutons serviront au humains pour communiquer avec le robot sur leur choix de programme. Le screen servira au robot à communiquer avec les humains.
+  On va commencer par coder l'interface sur le screen en utilisant le screen et les boutons. Les boutons serviront au humains pour communiquer avec le robot sur leur       choix de programme. Le screen servira au robot à communiquer avec les humains.
 
+  Interface terminée et fonctionnelle.
+
+- Phase 10 : ajouter les programmes
+
+  Il faut ajouter un programme, voir si il fonctionne comme ça, trouver un moyen de retourner à la page d'acceuil sans éteindre ou réinitialiser le robot et faire la mème chose avec l'autre programme.
+
+  Quand le programme à été rajouté, le screen ne voulais plus afficher l'interface, il se trouve que l'écriture était de la mème couleur que le fond...
+
+  Après beaucoup d'essais et de changements dans le code, il fonctionne.
+
+  Maintenant il ne reste plus qu'à rajouter l'autre programme en espérant qu'il de fasse pas tout planter...
 
 • 5. Architecture Électrique
 
