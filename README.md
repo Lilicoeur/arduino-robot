@@ -203,7 +203,7 @@ https://github.com/arduino-libraries/Robot_Control
 
 16/06 création du programme de suivi de ligne et ajout de musique interactive au début et à la fin du programme. Création d'un programme en utilisant les boutons. Problème à résoudre le screen ne fonctionne pas correctement même avec les bonnes commandes...
 
-17/06 problème compris et adaptation du programme pour que le screen fonctionne comme on veut. amélioration du programme des boutons pour qu'une image s'affiche à chaque fois qu'un bouton est pressé. Lancement d'un nouveau projet qui pourrai nous occuper longtemps. 
+17/06 problème compris et adaptation du programme pour que le screen fonctionne comme on veut. amélioration du programme des boutons pour qu'une image s'affiche à chaque fois qu'un bouton est pressé. Lancement d'un nouveau projet. Projet fini.
 
 ♥ Rapport : Analyse et Restauration du Robot Arduino CROMA
 
@@ -375,6 +375,10 @@ Alimentation insuffisante : Moteurs nécessitent 6V minimum
   Après beaucoup d'essais et de changements dans le code, il fonctionne.
 
   Maintenant il ne reste plus qu'à rajouter l'autre programme en espérant qu'il de fasse pas tout planter...
+
+  Le programme à été ajouté sans soucis -> les deux programmes ont été ajouté et fonctionnent correctement.
+
+  Le projet est terminé et prêt à être utilisé.
 
 • 5. Architecture Électrique
 
