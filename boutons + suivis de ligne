@@ -1,0 +1,251 @@
+#include <ArduinoRobot.h>
+#include <Wire.h>
+
+// Function prototypes
+void boutonMode();
+void arrow();
+void starr();
+void clearScreen();
+void ligne();
+void playMeloddyy();
+
+void setup() {
+  Robot.begin();
+  Robot.beginTFT();
+
+  clearScreen();
+
+  Robot.beginSpeaker();
+  playMelody();
+}
+
+void loop() {
+
+  // Draw menu
+  //clearScreen();
+  Robot.setRotation(0);
+  Robot.stroke(255,255,255);
+
+  Robot.text("Choisissez le mode", 10, 25);
+  Robot.text("de jeux :", 35, 45);
+
+  Robot.text("UP = boutons", 20, 90);
+  Robot.text("DOWN = ligne", 20, 120);
+
+  delay(200);
+
+  int bouton = Robot.keyboardRead();
+
+  if (bouton == BUTTON_UP) {
+    boutonMode();
+  }
+
+  if (bouton == BUTTON_DOWN) {
+    ligne();
+  } 
+  if (bouton == BUTTON_MIDDLE){
+    clearScreen();
+    Robot.stroke(255,255,255);
+    Robot.text("vous avez trouve ", 20, 25);
+    Robot.text("l'easter egg", 30, 45);
+    playMeloddyy();
+    delay(500);
+    Robot.motorsWrite(-110, 110);
+    delay(1000);
+    Robot.motorsWrite(0, 0);
+    delay(500);
+    Robot.motorsWrite(110, -110);
+    delay(1000);
+    Robot.motorsWrite(0, 0);
+    delay(100);
+    clearScreen();
+  }
+  
+}
+
+void boutonMode() {
+
+  clearScreen();
+
+  Robot.stroke(255,255,255);
+  Robot.text("Mode boutons", 25, 10);
+
+  while (true) {
+
+    int bouton = Robot.keyboardRead();
+
+
+    if (bouton == BUTTON_UP) {
+      Robot.setRotation(3);
+      arrow();
+
+      Robot.motorsWrite(110, 110);
+      delay(1000);
+      Robot.motorsWrite(0,0);
+    }
+
+    else if (bouton == BUTTON_LEFT) {
+      Robot.setRotation(2);
+      arrow();
+
+      Robot.motorsWrite(-100,100);
+      delay(700);
+      Robot.motorsWrite(0,0);
+    }
+
+    else if (bouton == BUTTON_RIGHT) {
+      Robot.setRotation(0);
+      arrow();
+
+      Robot.motorsWrite(100,-100);
+      delay(700);
+      Robot.motorsWrite(0,0);
+    }
+
+    else if (bouton == BUTTON_MIDDLE) {
+      clearScreen();
+      return;
+    }
+    
+    else if (bouton == BUTTON_DOWN) {
+      Robot.setRotation(1);
+      arrow();
+
+      Robot.motorsWrite(-110,-110);
+      delay(1000);
+      Robot.motorsWrite(0,0);
+    }
+
+    delay(50);
+  }
+}
+
+void arrow() {
+
+  clearScreen();
+
+  Robot.stroke(0,255,0);
+
+  // Shaft
+  Robot.line(34,80,94,80);
+
+  // Head
+  Robot.line(94,80,74,60);
+  Robot.line(94,80,74,100);
+
+  delay(500);
+
+  clearScreen();
+}
+
+void starr() {
+
+  clearScreen();
+
+  int cx = 64;
+  int cy = 80;
+  int R = 35;
+
+  float x[5];
+  float y[5];
+
+  Robot.stroke(255,255,0);
+
+  for (int i = 0; i < 5; i++) {
+
+    float angle = (i * 72 - 90) * 3.14159 / 180.0;
+
+    x[i] = cx + R * cos(angle);
+    y[i] = cy + R * sin(angle);
+  }
+
+  Robot.line(x[0], y[0], x[2], y[2]);
+  Robot.line(x[2], y[2], x[4], y[4]);
+  Robot.line(x[4], y[4], x[1], y[1]);
+  Robot.line(x[1], y[1], x[3], y[3]);
+  Robot.line(x[3], y[3], x[0], y[0]);
+
+  delay(1000);
+
+  clearScreen();
+}
+
+void clearScreen() {
+
+  Robot.stroke(0,0,0);
+  Robot.fill(0,0,0);
+  Robot.rect(0,0,128,160);
+}
+
+
+
+
+
+
+void ligne() {
+
+  clearScreen();
+
+  Robot.stroke(255,255,255);
+  Robot.text("Mode ligne", 30, 80);
+  Robot.updateIR();
+
+
+  while  (true) {
+
+  int bouton = Robot.keyboardRead();
+  int L2 = Robot.IRarray[0]; // far left
+  int L1 = Robot.IRarray[1]; // left
+  int C  = Robot.IRarray[2]; // center
+  int R1 = Robot.IRarray[3]; // right
+  int R2 = Robot.IRarray[4]; // far right
+
+  if (bouton == BUTTON_MIDDLE){
+    clearScreen();
+    return;
+  }else if (L1 < 500 && C < 500 && R1 < 500) {
+    Robot.motorsWrite(0, 0);
+    delay(4000);
+    
+  }else if (C < 500) {
+    Robot.motorsWrite(200, 200);
+  }
+
+  // slight left correction
+  else if (L1 < 500) {
+    Robot.motorsWrite(100, 0);
+  }
+  // strong left turn
+  else if (L2 < 500) {
+    Robot.motorsWrite(100, -100);
+  }
+
+  // slight right correction
+  else if (R1 < 500) {
+    Robot.motorsWrite(0, 100);
+  }
+
+  // strong right turn
+  else if (R2 < 500) {
+    Robot.motorsWrite(-100, 100);
+  }
+
+  else {
+    Robot.motorsWrite(0, 0);
+  }
+}
+}
+
+void playMelody() {
+  char melody[] = "4cgc4ege4gag2c";
+  Robot.playMelody(melody);
+}
+void playMelodyy() {
+  char melodyy[] = "8ce2a8ecc";
+  Robot.playMelody(melodyy);
+}
+
+void playMeloddyy() {
+  char meloddyy[] = "4g4b8C8e4C4e8g8b8C2e";
+  Robot.playMelody(meloddyy);
+}  
